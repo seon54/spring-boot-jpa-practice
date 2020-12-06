@@ -50,4 +50,10 @@ public class OrderRepository {
 
         return em.createQuery(cq).setMaxResults(1000).getResultList();
     }
+
+    public List<Order> findAllWithMemberDeliver() {
+        return em.createQuery("select o from Order o" +
+                " join fetch o.member m" +
+                " join fetch o.delivery d", Order.class).getResultList();
+    }
 }
