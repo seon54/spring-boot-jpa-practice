@@ -59,7 +59,7 @@ public class OrderApiController {
 
     @GetMapping("/api/v3.1/orders")
     public List<OrderDto> ordersV3_paging(
-            @RequestParam(value = "offset", defaultValue = "0") int offset ,
+            @RequestParam(value = "offset", defaultValue = "0") int offset,
             @RequestParam(value = "limit", defaultValue = "100") int limit) {
         List<Order> orders = orderRepository.findAllWithMemberDeliver(offset, limit);
         List<OrderDto> result = orders.stream()
@@ -71,6 +71,11 @@ public class OrderApiController {
     @GetMapping("/api/v4/orders")
     public List<OrderQueryDto> ordersV4() {
         return orderQueryRepository.findOrderQueryDtos();
+    }
+
+    @GetMapping("/api/v5/orders")
+    public List<OrderQueryDto> ordersV5() {
+        return orderQueryRepository.findAllByDto_optimization();
     }
 
     @Data
